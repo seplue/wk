@@ -20,12 +20,14 @@ class Station(object):
         pass
     
     def measureAll(self):
+        self.measurementTime = time.asctime()
         self.temperature = bme280.temperature
         self.pressure = bme280.pressure
         self.humidity = bme280.humidity
         self.dewPoint = self.temperature - ((100 - self.humidity) / 5)
 
     def printAll(self):
+        print("time: ", self.measurementTime)
         print("temperature: ", self.temperature)
         print("pressure: ", self.pressure)
         print("humidity: ", self.humidity)
@@ -35,6 +37,7 @@ class Station(object):
         return
     def writeMeasurementPage(self):
         f = open("/var/www/html/wk/lastMeasurement.txt", "w")
+        f.write("time: " + self.measurementTime + "\n")
         f.write("temperature: " + str(self.temperature) + "\n")
         f.write("pressure: " + str(self.pressure) + "\n")
         f.write("humidity: " + str(self.humidity) + "\n")
@@ -47,7 +50,7 @@ class Station(object):
             self.measureAll()
             self.writeMeasurementPage()
             self.printAll()
-            time.sleep(1)
+            time.sleep(5)
         return
 
 
