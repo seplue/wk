@@ -1,7 +1,7 @@
 #wetmesspi.py
 #contains class Station enabling measuring of sensors and logging, writing to file and printing of said measurements
 import logging
-logging.basicConfig(filename="/var/www/html/wk/logging.txt", level=logging.DEBUG)
+
 import time
 import math
 
@@ -19,6 +19,8 @@ class Station(object):
     dewPoint = 0
 
     def __init__(self):
+        logging.basicConfig(filename="/var/www/html/wk/logging.txt", level=logging.DEBUG)
+        logging.info("script 'station.py' started")
         pass
     
     def measureAll(self):
