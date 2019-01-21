@@ -30,14 +30,30 @@ class Station(object):
         print("pressure: ", self.pressure)
         print("humidity: ", self.humidity)
         print("dewPoint: ", self.dewPoint)
+        print("----------------------------")
     def logMeasurements():
         return
-    def writeMeasurementPage():
+    def writeMeasurementPage(self):
+        f = open("/var/www/html/wk/lastMeasurement.txt", "w")
+        f.write("temperature: " + str(self.temperature) + "\n")
+        f.write("pressure: " + str(self.pressure) + "\n")
+        f.write("humidity: " + str(self.humidity) + "\n")
+        f.write("dewPoint: " + str(self.dewPoint) + "\n")
+        f.write("----------------------------\n")
+        f.close()
         return
-
+    def continuousWrite(self):
+        while True:
+            self.measureAll()
+            self.writeMeasurementPage()
+            self.printAll()
+            time.sleep(1)
+        return
 
 
 #main program
 myStation = Station()
-myStation.measureAll()
-myStation.printAll()
+#myStation.measureAll()
+#myStation.printAll()
+#myStation.writeMeasurementPage()
+myStation.continuousWrite()
