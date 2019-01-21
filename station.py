@@ -1,5 +1,6 @@
 #wetmesspi.py
 import logging
+logging.basicConfig(filename="/var/www/html/wk/logging.txt", level=logging.DEBUG)
 import time
 import math
 
@@ -20,6 +21,7 @@ class Station(object):
         pass
     
     def measureAll(self):
+        self.measurementTime = 0
         self.measurementTime = time.asctime()
         self.temperature = bme280.temperature
         self.pressure = bme280.pressure
@@ -33,7 +35,13 @@ class Station(object):
         print("humidity: ", self.humidity)
         print("dewPoint: ", self.dewPoint)
         print("----------------------------")
-    def logMeasurements():
+    def logMeasurement(self):
+        logging.info("time: " + self.measurementTime + "\n")
+        logging.info("temperature: " + str(self.temperature) + "\n")
+        logging.info("pressure: " + str(self.pressure) + "\n")
+        logging.info("humidity: " + str(self.humidity) + "\n")
+        logging.info("dewPoint: " + str(self.dewPoint) + "\n")
+        logging.info("----------------------------\n")
         return
     def writeMeasurementPage(self):
         f = open("/var/www/html/wk/lastMeasurement.txt", "w")
@@ -45,10 +53,11 @@ class Station(object):
         f.write("----------------------------\n")
         f.close()
         return
-    def continuousWrite(self):
+    def continuousWork(self):
         while True:
             self.measureAll()
             self.writeMeasurementPage()
+            self.logMeasurement()
             self.printAll()
             time.sleep(5)
         return
@@ -59,4 +68,5 @@ myStation = Station()
 #myStation.measureAll()
 #myStation.printAll()
 #myStation.writeMeasurementPage()
-myStation.continuousWrite()
+#myStation.logMeasurement()
+myStation.continuousWork()
