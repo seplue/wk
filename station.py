@@ -1,7 +1,6 @@
 #wetmesspi.py
 #contains class Station enabling measuring of sensors and logging, writing to file and printing of said measurements
 import logging
-
 import time
 import math
 
