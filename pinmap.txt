@@ -1,0 +1,9 @@
+This document describes the pin mapping of all scripts in this folder
+
+GPIO.BOARD PINS:
+Pin 01: 3.3v
+Pin 02: 5v
+Pin 03:
+Pin 04: 5v
+Pin 15: Input for waterlevel.py
+Pin 18: Input for humidityStateChanges.py
