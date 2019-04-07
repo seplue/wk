@@ -1,7 +1,6 @@
 #wetmesspi.py
 #contains class Station enabling measuring of sensors and logging, writing to file and printing of said measurements
 import logging
-
 import time
 import math
 
@@ -34,9 +33,9 @@ class Station(object):
     def printAll(self):
         print("time: ", self.measurementTime)
         print("temperature: ", self.temperature)
-        print("pressure: ", self.pressure)
-        print("humidity: ", self.humidity)
-        print("dewPoint: ", self.dewPoint)
+        print("pressure:    ", self.pressure)
+        print("humidity:    ", self.humidity)
+        print("dewPoint:    ", self.dewPoint)
         print("----------------------------")
     def logMeasurement(self):
         logging.info("time: " + self.measurementTime + "\n")
